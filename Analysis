@@ -1,0 +1,202 @@
+My Analysis File
+
+There are two packages created. 
+	1. com.app.packageone
+	2. com.app.packagetwo
+	
+	Files in com.app.packageone
+		ParentClassOne.java
+		ChildClassOne.java
+		MainClassOne.java
+		
+	Files in com.app.packagetwo
+		ParentClassTwo.java
+		ChildClassTwo.java
+		MainClassTwo.java
+
+
+1) Public Access Specifier
+	a. Same class 
+		Displays the content
+	b. Sub class in same package
+		Displays the content
+	c. Other class in same package 
+		Displays the content
+	d. Sub class in other package
+		Displays the content 
+	e. Other class in other package
+		Displays the content
+		
+2) Private Access Specifier
+	a. Same class 
+		Displays the content
+	b. Sub class in same package
+		Does not display the content
+	c. Other class in same package 
+		Does not display the content
+	d. Sub class in other package
+		Does not display the content 
+	e. Other class in other package
+		Does not display the content
+		
+3) Protected Access Specifier
+	a. Same class 
+		Displays the content
+	b. Sub class in same package
+		Displays the content
+	c. Other class in same package 
+		Displays the content
+	d. Sub class in other package
+		Displays the content
+		
+		Since the class gets inherited in the subclass of the other package, 
+		we do not need to create an object of the main parent class from which 
+		we are inheriting. 
+		We can call the method by creating an object of the subclass. 
+		 
+	e. Other class in other package
+		Does not display the content
+		
+4) Default Access Specifier
+	a. Same class 
+		Displays the content
+	b. Sub class in same package
+		Displays the content
+	c. Other class in same package 
+		Displays the content
+	d. Sub class in other package
+		Does not display the content 
+	e. Other class in other package
+		Does not display the content
+		
+--------------------
+Consider the following scenario
+
+1)SCENARIO 1
+
+	Package 1 								
+ParentClass()
+{
+	private int x=10;
+	protected void display()
+	{
+		System.out.println("(ParentClassOneDisplay)Value of x is: "+x);
+	}
+}
+
+public class ChildClassOne extends ParentClassOne {
+	
+	public ChildClassOne()
+	{
+		System.out.println("Constructor of ChildClassOne");
+	}
+}
+public class ChildClassTestOne extends ChildClassOne {
+
+	public ChildClassTestOne()
+	{
+		System.out.println("From constructor of ChildClassTestOne");
+	}
+
+}
+public class MainOne {
+
+	public static void main(String[] args) {
+		ChildClassTestOne c1=new ChildClassTestOne();
+		c1.display();
+
+	}
+
+}
+
+The output displays the contents that are in the protected method display() of
+ParentClassOne.
+
+2)SCENARIO 2
+
+	Package 1
+public class ParentClassOne {
+	private int x=10;
+	/**
+	 * 
+	 */
+	public ParentClassOne()
+	{
+		System.out.println("From constr of ParentClassOne");
+	}
+	protected void display()
+	{
+		System.out.println("(ParentClassOneDisplay)Value of x is: "+x);
+	}
+}
+
+	Package 2
+public class ChildClassTwo extends ParentClassOne {
+	public ChildClassTwo()
+	{
+		System.out.println("Constructor of ChildClassTwo");
+	}
+}
+
+	Package 2
+public class ChildClassTestTwo extends ChildClassTwo{
+	public ChildClassTestTwo()
+	{
+		System.out.println("Constr of ChildClassTestTwo");
+	}
+}
+
+	Package 2
+public class MainTwo {
+
+	public static void main(String[] args) {
+		ChildClassTestTwo c=new ChildClassTestTwo();
+		c.display(); <--- This gives error. The method is not visible.
+	}
+}
+
+3)SCENARIO 3
+
+	Package 1
+public class ParentClassOne {
+	private int x=10;
+	/**
+	 * 
+	 */
+	public ParentClassOne()
+	{
+		System.out.println("From constr of ParentClassOne");
+	}
+	protected void display()
+	{
+		System.out.println("(ParentClassOneDisplay)Value of x is: "+x);
+	}
+}
+
+	Package 1
+public class ChildClassOne extends ParentClassOne {
+	
+	public ChildClassOne()
+	{
+		System.out.println("Constructor of ChildClassOne");
+	}
+}
+
+	Package 2
+public class ChildClassTestTwo extends ChildClassOne{
+	public ChildClassTestTwo()
+	{
+		System.out.println("Constr of ChildClassTestTwo");
+	}
+}
+
+	Package 2
+public class MainTwo {
+
+	public static void main(String[] args) {
+		ChildClassTestTwo c=new ChildClassTestTwo();
+		c.display(); <--- This gives error. The method is not visible.
+	}
+}
+
+	
